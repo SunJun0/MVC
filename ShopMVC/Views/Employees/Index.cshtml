@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ShopMVC.Models.Employees>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Boss.cshtml";
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ESex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EHiredate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ERole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EState)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ESex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EHiredate)
+        </td>
+        <td>
+            @if (item.ERole == 0)
+            {
+                @:老板
+            }
+            else if (item.ERole == 1)
+            {
+                @:员工
+            }
+        </td>
+        <td>
+            @if (item.EState == 0)
+            {
+                @:就职
+            }
+            else if (item.EState == 1)
+            {
+                @:已辞职
+            }
+        </td>
+    </tr>
+}
+
+</table>
