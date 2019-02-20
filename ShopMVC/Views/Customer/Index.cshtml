@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Employees.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 10px;
+    }
+</style>
+<table>
+    <tr>
+        <td>顾客姓名：</td>
+        <td><input id="CName" type="text" /></td>
+        <td><span id="CNametxt" style="display:none;color:red">姓名格式不正确</span></td>
+    </tr>
+
+    <tr>
+        <td>电话：</td>
+        <td><input id="CPhone" type="text" /></td>
+        <td><span id="CPhonetxt" style="display:none;color:red">电话格式不正确</span></td>
+    </tr>
+    <tr>
+        <td>积分：</td>
+        <td><input id="Credits" type="text" value="0" readonly="readonly" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><button class="layui-btn layui-btn-radius layui-btn-normal" onclick="tian()">添加</button></td>
+
+    </tr>
+</table>
+<table id="dt" class="table">
+    <tr>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>积分</th>
+    </tr>
+
+</table>
+<script>
+    function tian() {
+        var CName = $("#CName").val();
+        var CPhone = $("#CPhone").val();
+        var Credits = $("#Credits").val();
+        var phoneReg = /(^1[3|4|5|7|8|9]\d{9}$)|(^09\d{8}$)/;
+        var nameReg = /^[\u4E00-\u9FA5]{2,4}$/;
+        if (!nameReg.test(CName)) {
+            document.getElementById("CNametxt").style.display = "";
+
+        }
+        else if (!phoneReg.test(CPhone)) {
+            document.getElementById("CPhonetxt").style.display = "";
+        }
+        else {
+            $.ajax({
+                url: "http://localhost:55237/api/Customer/ControllerAdd",
+                data: { CName: CName, CPhone: CPhone, Credits: Credits },
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    if (data) {
+                        alert("添加成功");
+
+                        location.reload();
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+
+                }
+
+
+            })
+        }
+
+
+    }
+
+    $(function () {
+
+        $.ajax({
+            url: "http://localhost:55237/api/Customer/ControllerGet",
+            dataType: "json",
+            type: "get",
+            success: function (data) {
+                $(data).each(function () {
+                    $("#dt").append(
+                        "<tr>" +
+                        "<td>" + this.CName + "</td>" +
+                        "<td>" + this.CPhone + "</td>" +
+                        "<td>" + this.Credits + "</td>" +
+                        "</tr>");
+
+                })
+
+            }
+        })
+
+    })
+</script>
