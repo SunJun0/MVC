@@ -1,0 +1,47 @@
+﻿@model ShopMVC.Models.Employees
+
+@{
+    ViewBag.Title = "AddEmployees";
+    Layout = "~/Views/Boss.cshtml";
+}
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 10px;
+    }
+</style>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+@using (Html.BeginForm())
+{
+<table>
+    <tr>
+        <td>姓名</td>
+        <td><input id="Text1" type="text" name="EName" /></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>
+            <input id="Radio1" type="radio" checked value="男" name="ESex" />男
+            <input id="Radio1" type="radio" value="女" name="ESex" />女
+        </td>
+    </tr>
+    <tr>
+        <td>入职时间</td>
+        <td><input id="Text1" type="date" name="EHiredate" /></td>
+    </tr>
+    <tr>
+        <td>密码</td>
+        <td>
+            <input id="Text1" type="text" name="EPwd" />
+            <input id="Hidden1" type="hidden" value="1" name="ERole" />
+            <input id="Hidden1" type="hidden" value="0" name="EState" />
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="入职" class="btn btn-default" /></td>
+    </tr>
+</table>
+}
+
+
