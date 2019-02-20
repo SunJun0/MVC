@@ -661,6 +661,10 @@
     <Content Include="Views\Boss.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\AddEmployees.cshtml" />
+    <Content Include="Views\BoosGoods\Add.cshtml" />
+    <Content Include="Views\BoosGoods\Shi.cshtml" />
+    <Content Include="Views\BoosGoods\Index.cshtml" />
+    <Content Include="Views\BoosGoods\Tu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

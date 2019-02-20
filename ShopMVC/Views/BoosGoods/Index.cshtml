@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Boss.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <td>图片</td>
+                <td>名称</td>
+                <td>颜色</td>
+                <td>尺码</td>
+                <td>库存</td>
+                <td>进价</td>
+                <td>定价</td>
+                <td>是否上架</td>
+            </tr>
+        </thead>
+        <thead id="G_xian">
+        </thead>
+    </table>
+</div>
+<script>
+    Goods_xian();
+    function Goods_xian() {//显示商品信息
+        $.ajax({
+            url: "http://localhost:55237/api/Goods/Index",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
+                for (var i in data) {
+                    $("#G_xian").append("<tr><td><img height='40' width='50' src=" + data[i].GPicture + " alt=" + data[i].GName + " /></td><td>" + data[i].GName + "</td><td>" + data[i].GColor + "</td><td>" + data[i].GSize + "</td><td>" + data[i].GQuantity + "</td><td>" + data[i].GPrice + "</td><td>" + data[i].GPricing + "</td><td>" + (data[i].GState==0?"上架":"下架") + "</td></tr >");
+                }
+
+            }
+        })
+    };
+</script>
+

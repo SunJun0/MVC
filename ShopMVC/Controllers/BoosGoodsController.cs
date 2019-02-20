@@ -13,6 +13,10 @@ namespace ShopMVC.Controllers
         {
             return View();
         }
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult Shi(HttpPostedFileBase file)
         {
             if (file != null)//判断不为空
@@ -24,5 +28,6 @@ namespace ShopMVC.Controllers
                 return View();
 
         }
+
     }
 }
