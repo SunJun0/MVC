@@ -665,6 +665,7 @@
     <Content Include="Views\BoosGoods\Shi.cshtml" />
     <Content Include="Views\BoosGoods\Index.cshtml" />
     <Content Include="Views\BoosGoods\Tu.cshtml" />
+    <Content Include="Views\BoosGoods\Head.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,12 +44,12 @@
             <tr>
                 <td><label class="layui-form-label">图片</label></td>
 
-                <td><img id="demo1" height="200" width="200" src="" alt="" /></td>
+                <td><img class="layui-upload-img" width="200" height="200" id="demo1"></td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1" onclick="Goods()">立即提交</button>
+                    <button id="gooods" class="layui-btn" lay-submit="" lay-filter="demo1" onclick="Goods()">立即提交</button>
                 </td>
             </tr>
         </table>
@@ -60,13 +60,6 @@
 <div class="layui-upload-drag" id="test10" style="float:right">
     <i class="layui-icon"></i>
     <p>点击上传，或将图片拖拽到此处</p>
-</div>
-<div class="layui-upload">
-    <button type="button" class="layui-btn" id="test1">上传图片</button>
-    <div class="layui-upload-list">
-        <img class="layui-upload-img" id="demo1">
-        <p id="demoText"></p>
-    </div>
 </div>
 <script>
     $("#GPricing").change(function () {
@@ -86,18 +79,19 @@
         //拖拽上传
         upload.render({
             elem: '#test10'
-            , url: "/BoosGoods/Shi"
-            , before: function (obj) {
+            , url: "/BoosGoods/File"
+            , accept: "images"//文件类型
+            , auto: false//不自动上传
+            , bindAction: '#gooods'//绑定按钮
+            , choose: function (obj) {
                 //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
                     $('#demo1').attr('src', result); //图片链接（base64）
-                });
+            });
             }
-            , done: function (res) {
-                console.log(res)
-            }
-            , accept: "images"
-
+            //, done: function (res) {
+            //    console.log(res)
+            //}
         });
     });
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -118,9 +112,13 @@
         var GQuantity = $("#sum").val();
         var GPrice = $("#GPrice").val();
         var GPricing = $("#GPricing").val();
-        var GPicture = $("#GPicture").val();
+        var GPicture = $('#demo1').attr("src");//获取图片的路径
         var GState = 1;
-        if (GName == "" || GColor == "" || GSize == "" || GQuantity == "" || GPrice == "" || GPricing == "" || GPicture == "") {
+        if (GName == "" || GColor == "" || GSize == "" || GQuantity == "" || GPrice == "" || GPricing == "") {
+            return;
+        }
+        else if (GPicture == null) {
+            layer.msg('请选择图片');
             return;
         }
         else {
@@ -141,24 +139,4 @@
             })
         }
     }
-
-    layui.use(['form', 'layer'], function () {
-        $ = layui.jquery;
-        var form = layui.form
-            , layer = layui.layer;
-        //监听提交
-        form.on('submit(add)', function (data) {
-            $.ajax({
-                url: "http://xxxxxxxxxxxxxx/api/User/AddUser",
-                //dataType: 'text',
-                contentType: "application/json",
-                data: user, //请求的附加参数，用json对象
-                method: 'POST',
-                success: function (res) {
-
-                }
-            });
-            return false;//只此一句
-        });
-    });
 </script>
