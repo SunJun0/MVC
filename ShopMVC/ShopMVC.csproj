@@ -297,6 +297,7 @@
     <Content Include="images\wishlist.png" />
     <Content Include="js\com.js" />
     <Content Include="js\easyResponsiveTabs.js" />
+    <Content Include="js\echarts.min.js" />
     <Content Include="js\hover_pack.js" />
     <Content Include="js\jquery-1.11.1.min.js" />
     <Content Include="js\jquery-1.8.0.min.js" />
@@ -593,6 +594,9 @@
     <Content Include="Views\Achievements\GetAchievements.cshtml" />
     <Content Include="Views\Achievements\Zhuye.cshtml" />
     <Content Include="Views\Customer\ZhuCe.cshtml" />
+    <Content Include="Views\BoosGoods\Head.cshtml" />
+    <Content Include="Views\BoosGoods\Index.cshtml" />
+    <Content Include="Views\BoosGoods\Tu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

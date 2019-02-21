@@ -87,12 +87,12 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="box-title">占位符 </h4>
+                        <h4 class="box-title">销售情况 </h4>
                     </div>
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="card-body">
-                                
+
                                 <div id="traffic-chart" class="traffic-chart"></div>
                             </div>
                         </div>
@@ -135,3 +135,42 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+    Goods_xian();
+    function Goods_xian() {//显示商品信息
+        $.ajax({
+            url: "http://localhost:55237/api/Goods/Index",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
+                for (var i in data) {
+                    $("#G_xian").append("<tr><td><img height='40' width='50' src=" + data[i].GPicture + " alt=" + data[i].GName + " /></td><td>" + data[i].GName + "</td><td>" + data[i].GColor + "</td><td>" + data[i].GSize + "</td><td>" + data[i].GQuantity + "</td><td>" + data[i].GPrice + "</td><td>" + data[i].GPricing + "</td><td>" + (data[i].GState == 0 ? "上架" : "下架") + "</td></tr >");
+                }
+
+            }
+        })
+    };
+           var dom = document.getElementById("traffic-chart");
+           var myChart = echarts.init(dom);
+           var app = {};
+           option = null;
+           option = {
+               xAxis: {
+                   type: 'category',
+                   data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+               },
+               yAxis: {
+                   type: 'value'
+               },
+               series: [{
+                   data: [820, 932, 901, 934, 1290, 1330, 1320],
+                   type: 'line'
+               }]
+           };
+           ;
+           if (option && typeof option === "object") {
+               myChart.setOption(option, true);
+           }
+</script>
