@@ -1,0 +1,124 @@
+﻿@model IEnumerable<ShopMVC.Models.Market>
+
+@{
+    ViewBag.Title = "ShowMarket";
+    Layout = "~/Views/Boss.cshtml";
+}
+
+<h2>ShowMarket</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MCard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MNnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShopId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GPricing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GPicture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GState)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MCard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MNnum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShopId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GPricing)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GPicture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GState)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
