@@ -1,71 +1,30 @@
-﻿@model ShopMVC.Models.Employees
-
+﻿
 @{
     /**/
 
-    ViewBag.Title = "AddEmployees";
+    /**/
+
+    ViewBag.Title = "Indexs";
     Layout = "~/Views/Boss.cshtml";
 }
-<style>
-    table {
-        border-collapse: separate;
-        border-spacing: 10px;
-    }
-</style>
-
-<script src="~/layui/layui.js"></script>
 <script src="~/layui/layui.all.js"></script>
+<script src="~/layui/layui.js"></script>
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
-<div>
-    <form class="layui-form" action="/Employees/AddEmployees" method="post" id='fm1' lay-filter="example">
-        <div class="layui-form-item">
-            <label class="layui-form-label">姓名</label>
-            <div class="layui-input-inline">
-                <input type="text" name="EName" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input" v-model="user.username">
-            </div>
+<form class="layui-form" action="" id='fm1' lay-filter="example">
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="0" title="男" v-model='user.sex' checked="">
+            <input type="radio" name="sex" value="1" title="女" v-model='user.sex'>
         </div>
+    </div>
+</form>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-                <input type="radio" name="ESex" value="0" title="男" v-model='user.sex' checked="">
-                <input type="radio" name="ESex" value="1" title="女" v-model='user.sex'>
-            </div>
-        </div>
-
-        <div class="layui-form">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">入职时间</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="EHiredate" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-inline">
-                <input type="password" v-model='user.userpwd' name="EPwd" placeholder="请输入密码" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-        <input id="Hidden1" type="hidden" value="1" name="ERole" />
-        <input id="Hidden1" type="hidden" value="0" name="EState" />
-
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <input type="submit" class="layui-btn" lay-submit="/Employees/AddEmployees" v-on:click='dataSubmit' value="立即提交" />
-            </div>
-        </div>
-    </form>
-</div>
 <script src="~/layui-v2.4.5/layui/layui.all.js"></script>
 <script>
     window.onload = function () {
-        //Lay脚本Start
+        Lay脚本Start
         layui.use(['form', 'layedit', 'laydate'], function () {
             var form = layui.form
                 , layer = layui.layer
@@ -78,10 +37,7 @@
             laydate.render({
                 elem: '#date1'
             });
-            laydate.render({
-                elem: '#test5'
-                , type: 'datetime'
-            });
+
             //创建一个编辑器
             var editIndex = layedit.build('LAY_demo_editor');
 

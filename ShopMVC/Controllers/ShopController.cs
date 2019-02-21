@@ -13,5 +13,13 @@ namespace ShopMVC.Controllers
         {
             return View();
         }
+        public ActionResult Indexs()
+        {
+            return View();
+        }
+        public ActionResult Indexss()
+        {
+            return View();
+        }
     }
 }
