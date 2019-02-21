@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "GetAchievements";
+    Layout = "~/Views/Employees.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<table id="dt" class="table">
+    <tr>
+        <th>名次</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>销售额</th>
+    </tr>
+   
+</table>
+<script>
+    $(function () {
+        $.ajax({
+            url: "http://localhost:55237/api/Achievements/GetAchievements",
+            dataType: "json",
+            type: "get",
+            success: function (data) {
+                $(data).each(function () {
+                    $("#dt").append("<tr>"+
+                        "<th>"+this.RowNum+"</th>"+
+                        "<td>"+this.EName+"</td>"+
+                        "<td>"+this.ESex+"</td>"+
+                        "<td>"+this.ASale+"</td>"+
+                    "</tr>");
+
+                })
+
+            }
+        })
+    })
+</script>

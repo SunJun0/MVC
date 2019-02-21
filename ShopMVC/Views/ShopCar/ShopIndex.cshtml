@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "ShopIndex";
+    Layout = "~/Views/Employees.cshtml";
+}
+
+<div style="width:50%;height:420px;float:left;margin-top:50px">
+    <div style="background-color:red;width:150px;height:150px;margin-left:260px">
+    </div><br />
+    <div style="margin-left:260px">
+        <span>名称：</span><br /><br />
+
+        <span>颜色：</span><br /><br />
+
+        <span>尺码：</span><br /><br />
+
+        <span>库存：</span><br /><br />
+
+        <b style="color:red">￥：88</b><br /><br />
+
+        <input id="Button1" type="button" value="加入购物车" />
+    </div>
+
+</div>
+@Html.BeginForm()
+{
+<div style="width:50%;height:420px;float:left;margin-top:50px" ">
+    <div align="center">
+        <span>名称：</span><input name="GName" type="text" /><br /><br /><br /><br />
+
+        <span>颜色：</span><input name="GColor" type="text" /><br /><br /><br /><br />
+
+        <span>尺码：</span><input name="GSize" type="text" /><br /><br /><br /><br />
+
+        <span align="center"><input id="Button1" type="submit" value="商品查询" /></span>
+    </div>
+</div>
+}
+
