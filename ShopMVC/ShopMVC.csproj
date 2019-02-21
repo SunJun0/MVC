@@ -134,6 +134,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShopCarController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -593,6 +594,9 @@
     <Content Include="Views\Achievements\GetAchievements.cshtml" />
     <Content Include="Views\Achievements\Zhuye.cshtml" />
     <Content Include="Views\Customer\ZhuCe.cshtml" />
+    <Content Include="Views\BoosGoods\Index.cshtml" />
+    <Content Include="Views\BoosGoods\Tu.cshtml" />
+    <Content Include="Views\ShopCar\ShopIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
