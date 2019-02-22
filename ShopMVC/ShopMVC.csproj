@@ -679,6 +679,12 @@
     <Content Include="Views\Caiwu\ShowMarket.cshtml" />
     <Content Include="Views\Caiwu\ShowProfit.cshtml" />
     <Content Include="Views\Shop\Indexs.cshtml" />
+    <Content Include="Views\Achievements\GetAchievements.cshtml" />
+    <Content Include="Views\Achievements\Zhuye.cshtml" />
+    <Content Include="Views\Customer\ZhuCe.cshtml" />
+    <Content Include="Views\BoosGoods\Index.cshtml" />
+    <Content Include="Views\BoosGoods\Tu.cshtml" />
+    <Content Include="Views\ShopCar\ShopIndex.cshtml" />
     <Content Include="Views\ShopCar\ShopIndex.cshtml" />
     <Content Include="Views\Achievements\GetAchievements.cshtml" />
     <Content Include="Views\Achievements\Zhuye.cshtml" />
