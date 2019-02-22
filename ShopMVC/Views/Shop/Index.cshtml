@@ -80,14 +80,17 @@
         });
 
     });
-    function xian() {
+    function xian()
+    {
         $.ajax({
             url: "http://localhost:55237/api/Employees/ShowMarket",
             type: 'get',
             dataType: 'Json',
-            success: function (data) {
+            success: function (data)
+            {
                 $("#biao").empty();
-                for (var i in data) {
+                for (var i in data)
+                {
                     $("#biao").append("<tr><td>" + data[i].MCard + "</td><td>" + data[i].MNnum + "</td><td>" + data[i].MTime + "</td><td>" + data[i].GName + "</td><td>" + data[i].GColor + "</td><td>" + data[i].GPicture + "</td></tr >");
                 }
             }

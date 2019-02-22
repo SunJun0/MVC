@@ -129,11 +129,13 @@
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Controllers\AchievementsController.cs" />
     <Compile Include="Controllers\BoosGoodsController.cs" />
     <Compile Include="Controllers\CaiwuController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShopCarController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -677,6 +679,10 @@
     <Content Include="Views\Caiwu\ShowMarket.cshtml" />
     <Content Include="Views\Caiwu\ShowProfit.cshtml" />
     <Content Include="Views\Shop\Indexs.cshtml" />
+    <Content Include="Views\ShopCar\ShopIndex.cshtml" />
+    <Content Include="Views\Achievements\GetAchievements.cshtml" />
+    <Content Include="Views\Achievements\Zhuye.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
