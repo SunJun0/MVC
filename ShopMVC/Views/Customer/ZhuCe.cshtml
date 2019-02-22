@@ -17,18 +17,18 @@
     <table>
         <tr>
             <td>顾客姓名：</td>
-            <td><input id="CName" type="text" /></td>
+            <td><input id="CName" type="text" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input" /></td>
             <td><span id="CNametxt" style="display:none;color:red">姓名格式不正确</span></td>
         </tr>
 
         <tr>
             <td>电话：</td>
-            <td><input id="CPhone" type="text" /></td>
+            <td><input id="CPhone" type="text" required lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input" /></td>
             <td><span id="CPhonetxt" style="display:none;color:red">电话格式不正确</span></td>
         </tr>
         <tr>
             <td>积分：</td>
-            <td><input id="Credits" type="text" value="0" readonly="readonly" /></td>
+            <td><input id="Credits" type="text" required lay-verify="required" value="0" autocomplete="off" class="layui-input" readonly="readonly" /></td>
         </tr>
         <tr>
             <td></td>
@@ -36,14 +36,21 @@
 
         </tr>
     </table>
-    <table id="dt" class="table">
-        <tr>
-            <th>姓名</th>
-            <th>电话</th>
-            <th>积分</th>
-        </tr>
+    <div class="layui-table-box">
+        <div class="layui-table-header">
+            <table id="dt" cellpadding="0" cellspacing="0" border="0" class="layui-table">
+                <thead>
+                    <tr>
+                        <th data-field="CName" data-keyboard="1-0-0" class="layui-unselect">姓名</th>
+                        <th  data-field="CPhone" data-keyboard="1-0-1" class="layui-unselect">电话</th>
+                        <th  data-field="Credits" data-keyboard="1-0-2" class="layui-unselect">积分</th>
+                    </tr>
+                </thead>
 
-    </table>
+            </table>
+        </div>
+    </div>
+   
 </div>
 <script>
     function tian() {

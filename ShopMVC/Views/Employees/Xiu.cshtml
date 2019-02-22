@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Xiu";
+    Layout = "~/Views/Employees.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 10px;
+    }
+</style>
+<div class="layui-layer-shade" id="layui-layer-shade46" times="46" style="z-index:19891059;background-color:rgb(0,0,0);opacity:0.3;"></div>
+<div class="layui-layer layui-layer-page layui-layer-rim" id="layui-layer46" type="page" times="46" showtime="0" contype="string" style="z-index:19891060;width:500px;height:280px;top:186px;left:105.5px;">
+    <div class="layui-layer-title" style="cursor:move;">修改密码</div>
+    <div stule="padding:10px;">
+        <table class="layui-anim layui-anim-scale" data-anim="layui-anim-scale">
+            <tr>
+                <td>原密码：</td>
+                <td>
+                    <input id="YEPwd" type="text" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input" /></td>
+                <td>
+                    <span id="YEPwdTxt" style="display:none;color:red">不正确</span>
+                    <span id="YEPwdTxts" style="display:none;color:red">验证成功</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span style="color:red;font-size:8px;">请输入原密码点击验证</span></td>
+                <td><a onclick="yan()" style="cursor:pointer;color:dodgerblue" onmouseover="this.style.color='red'" onmouseout="this.style.color='dodgerblue'">点击验证</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>新密码：</td>
+                <td>
+                 
+                    <input readonly="readonly" id="XEPwd" type="text" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input" />
+                </td>
+                <td><span id="XEPwdTxt" style="display:none;color:red">请输入新密码</span></td>
+            </tr>
+            <tr>
+                <td>再次输入：</td>
+                <td>
+                    
+                    <input readonly="readonly" id="ZEPwd" type="text" required lay-verify="required" placeholder="请再次输入" autocomplete="off" class="layui-input" />
+                </td>
+                <td>
+                    <span id="ZEPwdTxt" style="display:none;color:red">请再次确认密码</span>
+                    <span id="ZEPwdTxts" style="display:none;color:red">两次密码不一致</span>
+                </td>
+            </tr>
+            <tr>
+                <td><input id="Button1" type="button" value="修改" onclick="Xiu()" /></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+    <span class="layui-layer-setwin">
+        <a class="layui-layer-ico layui-layer-close layui-layer-close1" href="/Achievements/Zhuye"></a>
+    </span>
+    <span class="layui-layer-resize"></span>
+</div>
+<script>
+
+    function yan() {
+        var id = 3;//员工ID------------------------------------------------------------------------------------------
+        var YEPwd = $("#YEPwd").val();
+        if (YEPwd != null) {
+            $.ajax({
+                url: "http://localhost:55237/api/Employees/Sel?id=" + id,
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+
+                    $(data).each(function () {
+
+                        if (this.EPwd != YEPwd)
+                        {
+                            document.getElementById("YEPwdTxt").style.display = "";
+                            document.getElementById("YEPwdTxts").style.display = "none";
+                        }
+                        else if (this.EPwd == YEPwd)
+                        {
+                           
+                            document.getElementById("YEPwdTxts").style.display = "";
+                            document.getElementById("YEPwdTxt").style.display = "none";                        
+                            $("#XEPwd").removeAttr("readonly");
+                            haha();
+                        }
+                        
+                    })
+                }
+
+            })
+
+          
+        }
+    }
+
+    function haha() {
+        var id = 3;//员工ID----------------------------------------------------------------------------------------------
+        var XEPwd = $("#XEPwd").val();
+
+
+        if (XEPwd != null) {
+            $("#ZEPwd").removeAttr("readonly")
+           hehe();
+            //document.getElementById("XEPwdTxt").style.display = "";
+        }
+    }
+    function hehe()
+    {
+        var XEPwd = $("#XEPwd").val();
+        var ZEPwd = $("#ZEPwd").val();
+        if (ZEPwd == null) {
+            document.getElementById("ZEPwdTxt").style.display = "";
+            document.getElementById("ZEPwdTxts").style.display = "none";
+        }
+       
+
+    }
+       
+       
+    
+   
+        function Xiu()
+        {
+           
+            var id = 3;//员工ID----------------------------------------------------------------------------------------------
+            var XEPwd = $("#XEPwd").val();
+            var ZEPwd = $("#ZEPwd").val();
+
+            
+            if (XEPwd != ZEPwd)
+            {
+                    document.getElementById("ZEPwdTxt").style.display = "none";
+                    document.getElementById("ZEPwdTxts").style.display = "";
+            }
+            else
+            {
+                $.ajax({
+                    url: "http://localhost:55237/api/Employees/Upd",
+                    dataType: "json",
+                    type: "put",
+                    data: { EPwd: ZEPwd, EId: id },
+                    success: function (data) {
+                        if (data > 0) {
+                            alert("修改成功");
+                            location.href = "/Achievements/Zhuye/";
+                        }
+                        else {
+                            alert("修改失败");
+                        }
+
+                    }
+                })
+            }
+       
+
+               
+            }
+
+        
+          
+
+    
+
+</script>

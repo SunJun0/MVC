@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Controllers\AchievementsController.cs" />
     <Compile Include="Controllers\BoosGoodsController.cs" />
     <Compile Include="Controllers\CaiwuController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -641,6 +642,7 @@
     <Content Include="obj\Release\ShopMVC.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Release\ShopMVC.csprojAssemblyReference.cache" />
     <Content Include="Scripts\custom_map_config.json" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\echarts引用文件.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -671,7 +673,6 @@
     <Content Include="Views\Boss.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\AddEmployees.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\BoosGoods\Add.cshtml" />
     <Content Include="Views\BoosGoods\Shi.cshtml" />
     <Content Include="Views\Caiwu\Index.cshtml" />
@@ -684,6 +685,8 @@
     <Content Include="Views\BoosGoods\Index.cshtml" />
     <Content Include="Views\BoosGoods\Tu.cshtml" />
     <Content Include="Views\ShopCar\ShopIndex.cshtml" />
+    <Content Include="Views\BoosGoods\Head.cshtml" />
+    <Content Include="Views\Employees\Xiu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
