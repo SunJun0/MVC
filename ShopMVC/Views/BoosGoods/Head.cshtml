@@ -3,21 +3,21 @@
     ViewBag.Title = "Head";
     Layout = "~/Views/Boss.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <div class="content">
     <!-- Animated -->
     <div class="animated fadeIn">
         <!-- Widgets  -->
         <div class="row">
             <div class="col-lg-3 col-md-6">
-                <div class="card">
+                <div class="card">  
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-1">
                                 <i class="pe-7s-cash"></i>
                             </div>
                             <div class="stat-content">
-                                <div class="text-left dib">
+                                <div class="text-left dib">   
                                     <div class="stat-text">￥<span class="count">23569</span></div>
                                     <div class="stat-heading">销售额</div>
                                 </div>
@@ -99,28 +99,28 @@
                         <div class="col-lg-4">
                             <div class="card-body">
                                 <div class="progress-box progress-1">
-                                    <h4 class="por-title">王禄超</h4>
-                                    <div class="por-txt">10,000 Users (100%)</div>
+                                    <h4 class="por-title">月度销售额</h4>
+                                    <div class="por-txt">10,000 目标 (100%)</div>
                                     <div class="progress mb-2" style="height: 5px;">
                                         <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="progress-box progress-2">
-                                    <h4 class="por-title">董镇绮</h4>
+                                    <h4 class="por-title">成交量</h4>
                                     <div class="por-txt">6,400 Users (64%)</div>
                                     <div class="progress mb-2" style="height: 5px;">
                                         <div class="progress-bar bg-flat-color-2" role="progressbar" style="width: 24%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="progress-box progress-2">
-                                    <h4 class="por-title">李伟</h4>
+                                    <h4 class="por-title">商品总库存</h4>
                                     <div class="por-txt">6000 Users (60%)</div>
                                     <div class="progress mb-2" style="height: 5px;">
                                         <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="progress-box progress-2">
-                                    <h4 class="por-title">小明</h4>
+                                    <h4 class="por-title">会员</h4>
                                     <div class="por-txt">9000 Users (90%)</div>
                                     <div class="progress mb-2" style="height: 5px;">
                                         <div class="progress-bar bg-flat-color-4" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
@@ -137,40 +137,67 @@
 </div>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 <script type="text/javascript">
-    Goods_xian();
-    function Goods_xian() {//显示商品信息
+    var Name = ['我','是','啥'];
+    var ASale = [];
         $.ajax({
-            url: "http://localhost:55237/api/Goods/Index",
+            url: "http://localhost:55237/api/Achievements/GetAchievements_1",
             type: 'get',
             dataType: 'Json',
             success: function (data) {
-                $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
                 for (var i in data) {
-                    $("#G_xian").append("<tr><td><img height='40' width='50' src=" + data[i].GPicture + " alt=" + data[i].GName + " /></td><td>" + data[i].GName + "</td><td>" + data[i].GColor + "</td><td>" + data[i].GSize + "</td><td>" + data[i].GQuantity + "</td><td>" + data[i].GPrice + "</td><td>" + data[i].GPricing + "</td><td>" + (data[i].GState == 0 ? "上架" : "下架") + "</td></tr >");
+                    Name.push(data[i].EName);//数组追加
+                    ASale.push(data[i].ASale);//数组追加
                 }
-
+                alert(Name);
+                fn1();
+                fn2();
             }
-        })
-    };
-           var dom = document.getElementById("traffic-chart");
-           var myChart = echarts.init(dom);
-           var app = {};
-           option = null;
-           option = {
-               xAxis: {
-                   type: 'category',
-                   data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-               },
-               yAxis: {
-                   type: 'value'
-               },
-               series: [{
-                   data: [820, 932, 901, 934, 1290, 1330, 1320],
-                   type: 'line'
-               }]
-           };
-           ;
-           if (option && typeof option === "object") {
-               myChart.setOption(option, true);
-           }
+    });
+    
+    function fn1() {
+        var dom = document.getElementById("traffic-chart");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        option = {
+            xAxis: {
+                type: 'category',
+                data: [],
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [ASale],
+                type: 'line'
+            }]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+    function fn2() {
+        var dom = document.getElementById("traffic-chart");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        option = {
+            xAxis: {
+                type: 'category',
+                data: [Name]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line'
+            }]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
 </script>

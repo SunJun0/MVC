@@ -14,9 +14,9 @@ namespace ShopMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            string result = HttpClientHelper.Send("get", "/api/Employees/ShowEmployees", null);
-            List<Employees> jias = JsonConvert.DeserializeObject<List<Employees>>(result);
-            return View(jias);
+            //string result = HttpClientHelper.Send("get", "/api/Employees/ShowEmployees", null);
+            //List<Employees> jias = JsonConvert.DeserializeObject<List<Employees>>(result);
+            return View();
         }
         [HttpGet]
         public ActionResult AddEmployees()

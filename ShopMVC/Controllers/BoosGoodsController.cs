@@ -32,7 +32,7 @@ namespace ShopMVC.Controllers
         {
             return View();
         }
-        public ActionResult shi()//首页
+        public ActionResult Shi()//首页
         {
             return View();
         }
