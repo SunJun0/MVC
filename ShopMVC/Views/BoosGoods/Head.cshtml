@@ -18,8 +18,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">   
-                                    <div class="stat-text">￥<span class="count">23569</span></div>
-                                    <div class="stat-heading">销售额</div>
+                                    <div class="stat-text">￥<span class="count" id="sum"></span></div>
+                                    <div class="stat-heading">本月销售额</div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">2986</span></div>
+                                    <div class="stat-text" ><span id="G_s" class="count">17</span></div>
                                     <div class="stat-heading">会员</div>
                                 </div>
                             </div>
@@ -137,8 +137,10 @@
 </div>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 <script type="text/javascript">
-    var Name = ['我','是','啥'];
-    var ASale = [];
+    var Name = [];//姓名
+    var ASale = [];//销售额
+    var Sum = 0;//本月总销售额
+    var G_sum = 0;
         $.ajax({
             url: "http://localhost:55237/api/Achievements/GetAchievements_1",
             type: 'get',
@@ -146,13 +148,29 @@
             success: function (data) {
                 for (var i in data) {
                     Name.push(data[i].EName);//数组追加
-                    ASale.push(data[i].ASale);//数组追加
+                    ASale.push(parseInt(data[i].ASale));//数组追加
+                    Sum += parseInt(data[i].ASale);
                 }
-                alert(Name);
                 fn1();
-                fn2();
+                fn();
             }
     });
+    
+    function fn() {
+        $.ajax({
+            url: "http://localhost:55237/api/Customer/ControllerGet",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                for (var i in data) {
+                    G_sum++;
+                }
+                $("#G_s").text(parseInt(G_sum));
+            }
+        });
+        $("#sum").text(Sum);
+    }
+    
     
     function fn1() {
         var dom = document.getElementById("traffic-chart");
@@ -162,36 +180,13 @@
         option = {
             xAxis: {
                 type: 'category',
-                data: [],
+                data: Name
             },
             yAxis: {
                 type: 'value'
             },
             series: [{
-                data: [ASale],
-                type: 'line'
-            }]
-        };
-        ;
-        if (option && typeof option === "object") {
-            myChart.setOption(option, true);
-        }
-    }
-    function fn2() {
-        var dom = document.getElementById("traffic-chart");
-        var myChart = echarts.init(dom);
-        var app = {};
-        option = null;
-        option = {
-            xAxis: {
-                type: 'category',
-                data: [Name]
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                data: ASale,
                 type: 'line'
             }]
         };
