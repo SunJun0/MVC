@@ -37,5 +37,9 @@ namespace ShopMVC.Controllers
                 return Content("bu ok");
             }
         }
+        public ActionResult Xiu()  //修改密码
+        {
+            return View();
+        }
     }
 }
