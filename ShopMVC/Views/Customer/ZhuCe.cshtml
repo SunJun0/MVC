@@ -1,10 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "ZhuCe";
+    ViewBag.Title = "Xiu";
     Layout = "~/Views/Employees.cshtml";
 }
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui/layui.js"></script>
 <style>
@@ -36,23 +38,66 @@
 
         </tr>
     </table>
-    <div class="layui-table-box">
-        <div class="layui-table-header">
-            <table id="dt" cellpadding="0" cellspacing="0" border="0" class="layui-table">
-                <thead>
-                    <tr>
-                        <th data-field="CName" data-keyboard="1-0-0" class="layui-unselect">姓名</th>
-                        <th  data-field="CPhone" data-keyboard="1-0-1" class="layui-unselect">电话</th>
-                        <th  data-field="Credits" data-keyboard="1-0-2" class="layui-unselect">积分</th>
-                    </tr>
-                </thead>
-
-            </table>
-        </div>
+    <div>
+        <table id="table" class="layui-table">
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>电话</td>
+                    <td>积分</td>
+                </tr>
+            </thead>
+            <thead id="G_xian">
+            </thead>
+        </table>
+        <div id="demo7"></div>
     </div>
-   
+
 </div>
+
+
+
+
+
+
+
+
+
 <script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        $.ajax({
+            url: "http://localhost:55237/api/Customer/ControllerGet",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
+                for (var i in data) {
+                    //完整功能
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit: 5
+                        , jump: function (obj) {
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.CName + '</td><td>' + item.CPhone + '</td><td>' + item.Credits + '</td></tr >');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+
+            }
+        })
+    });
+
     function tian() {
         var CName = $("#CName").val();
         var CPhone = $("#CPhone").val();
@@ -91,26 +136,72 @@
 
     }
 
-    $(function () {
+</script>
 
-        $.ajax({
-            url: "http://localhost:55237/api/Customer/ControllerGet",
-            dataType: "json",
-            type: "get",
-            success: function (data) {
-                $(data).each(function () {
-                    $("#dt").append(
-                        "<tr>" +
-                        "<td>" + this.CName + "</td>" +
-                        "<td>" + this.CPhone + "</td>" +
-                        "<td>" + this.Credits + "</td>" +
-                        "</tr>");
 
-                })
+
+
+
+
+@*<script>
+        function tian() {
+            var CName = $("#CName").val();
+            var CPhone = $("#CPhone").val();
+            var Credits = $("#Credits").val();
+            var phoneReg = /(^1[3|4|5|7|8|9]\d{9}$)|(^09\d{8}$)/;
+            var nameReg = /^[\u4E00-\u9FA5]{2,4}$/;
+            if (!nameReg.test(CName)) {
+                document.getElementById("CNametxt").style.display = "";
 
             }
-        })
+            else if (!phoneReg.test(CPhone)) {
+                document.getElementById("CPhonetxt").style.display = "";
+            }
+            else {
+                $.ajax({
+                    url: "http://localhost:55237/api/Customer/ControllerAdd",
+                    data: { CName: CName, CPhone: CPhone, Credits: Credits },
+                    dataType: "json",
+                    type: "post",
+                    success: function (data) {
+                        if (data) {
+                            alert("添加成功");
 
-    })
-</script>
+                            location.reload();
+                        }
+                        else {
+                            alert("添加失败");
+                        }
+
+                    }
+
+
+                })
+            }
+
+
+        }
+
+        $(function () {
+
+            $.ajax({
+                url: "http://localhost:55237/api/Customer/ControllerGet",
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    $(data).each(function () {
+                        $("#dt").append(
+                            "<tr>" +
+                            "<td>" + this.CName + "</td>" +
+                            "<td>" + this.CPhone + "</td>" +
+                            "<td>" + this.Credits + "</td>" +
+                            "</tr>");
+
+                    })
+
+                }
+            })
+
+        })
+    </script>*@
 
