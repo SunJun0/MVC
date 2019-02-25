@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ShowPrice";
+    ViewBag.Title = "ShowWages";
     Layout = "~/Views/Boss.cshtml";
 }
 
@@ -11,7 +11,10 @@
     <table id="table" class="layui-table">
         <thead>
             <tr>
-                <td>总进价金额</td>
+                <td>员工排行</td>
+                <td>员工名称</td>
+                <td>员工性别</td>
+                <td>员工工资</td>
             </tr>
         </thead>
         <thead id="G_xian">
@@ -24,7 +27,7 @@
         var laypage = layui.laypage
             , layer = layui.layer;
         $.ajax({
-            url: "http://localhost:55237/api/Employees/ShowPrice",
+            url: "http://localhost:55237/api/Employees/ShowWages",
             type: 'get',
             dataType: 'Json',
             success: function (data) {
@@ -36,13 +39,13 @@
                         , count: data.length
 
                         , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
-                        , limit: 5
+                        , limit:5
                         , jump: function (obj) {
                             document.getElementById('G_xian').innerHTML = function () {
                                 var arr = []
                                     , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                 layui.each(thisData, function (index, item) {
-                                    arr.push('<tr><td>' + item.Zong + '</td></tr >');
+                                    arr.push('<tr><td>' + item.RowNum + '</td><td>' + item.EName + '</td><td>' + item.ESex + '</td><td>' + item.payroll + '</td></tr >');
                                 });
                                 return arr.join('');
                             }();

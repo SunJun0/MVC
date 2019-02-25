@@ -691,6 +691,7 @@
     <Content Include="Views\Achievements\Zhuye.cshtml" />
     <Content Include="Views\BoosGoods\Head.cshtml" />
     <Content Include="Views\Caiwu\ShowPrice.cshtml" />
+    <Content Include="Views\Caiwu\ShowWages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
