@@ -18,13 +18,17 @@ namespace ShopMVC.Controllers
         [HttpGet]
         public ActionResult ShowMarket()
         {
-            string result = HttpClientHelper.Send("get", "/api/Employees/ShowMarket", null);
-            List<Market> jias = JsonConvert.DeserializeObject<List<Market>>(result);
-            return View(jias);
+            return View();
         }
         public ActionResult ShowProfit()
         {
             return View();
+        }
+        public ActionResult ShowPrice()
+        {
+            string result = HttpClientHelper.Send("get", "/api/Employees/ShowPrice", null);
+            List<Market> jias = JsonConvert.DeserializeObject<List<Market>>(result);
+            return View(jias);
         }
     }
 }

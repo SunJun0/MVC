@@ -3,36 +3,64 @@
     ViewBag.Title = "GetAchievements";
     Layout = "~/Views/Employees.cshtml";
 }
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<div class="layui-anim layui-anim-rotate" data-anim="layui-anim-rotate">
-    <table id="dt" class="table">
-        <tr>
-            <th>名次</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>销售额</th>
-        </tr>
 
-    </table>
- </div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<div class="layui-anim layui-anim-rotate" data-anim="layui-anim-rotate">
+
+        <table id="table" class="layui-table">
+            <thead>
+                <tr>
+                    <td>名次</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>销售额</td>
+
+                </tr>
+            </thead>
+            <thead id="G_xian">
+            </thead>
+        </table>
+        <div id="demo7"></div>
+    </div>
     <script>
-        $(function () {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
             $.ajax({
                 url: "http://localhost:55237/api/Achievements/GetAchievements",
-                dataType: "json",
-                type: "get",
+                type: 'get',
+                dataType: 'Json',
                 success: function (data) {
-                    $(data).each(function () {
-                        $("#dt").append("<tr>" +
-                            "<th>" + this.RowNum + "</th>" +
-                            "<td>" + this.EName + "</td>" +
-                            "<td>" + this.ESex + "</td>" +
-                            "<td>" + this.ASale + "</td>" +
-                            "</tr>");
+                    $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
+                    for (var i in data) {
+                        //完整功能
+                        laypage.render({
+                            elem: 'demo7'
+                            , count: data.length
 
-                    })
+                            , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                            , limit: 5
+                            , jump: function (obj) {
+                                document.getElementById('G_xian').innerHTML = function () {
+                                    var arr = []
+                                        , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                    layui.each(thisData, function (index, item) {
+                                        arr.push('<tr><td>' + item.RowNum + '</td><td>' + item.EName + '</td><td>' + item.ESex + '</td><td>' + item.ASale + '</td></tr >');
+                                    });
+                                    return arr.join('');
+                                }();
+                            }
+                        });
+                    }
 
                 }
             })
-        })
+        });
     </script>
+
+
+
+
+    
