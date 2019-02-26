@@ -1,0 +1,142 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>衣心衣意|登录</title>
+    <style>
+        #msg {
+            width: 100%;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+    <link href="~/Content/Login/css/cloud-admin.css" rel="stylesheet">
+    <link href="~/Content/Login/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/Login/js/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
+    <link href="~/Content/Login/js/uniform/css/uniform.default.min.css" rel="stylesheet" />
+    <link href="~/Content/Login/css/animatecss/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/Login/css/animatecss/animate.min.css" rel="stylesheet" />
+</head>
+<body class="login">
+    <section id="page">
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div id="logo">
+                            <a href="/Account/Login/"><img src="~/Content/Login/img/logo/logo.png" height="40" alt="logo name" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section id="login_bg" class="visible">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="login-box">
+                            <h2 class="bigintro">用户登录</h2>
+                            <div class="divide-40"></div>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">用户名</label>
+                                    <i class="fa fa-user"></i>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <i class="fa fa-lock"></i>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="pwd">
+                                </div>
+                                <div id="captcha"></div>
+                                <div id="msg"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <script src="~/Content/Login/js/jquery/jquery-2.0.3.min.js"></script>
+    <script src="~/Content/Login/js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Content/Login/bootstrap-dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/Login/js/uniform/jquery.uniform.min.js"></script>
+    <script src="~/Content/Login/js/backstretch/jquery.backstretch.min.js"></script>
+    <script src="~/Content/Login/js/script.js"></script>
+    <script src="~/Content/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/ValidateCode/dist/jigsaw.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.setPage("login_bg");
+            App.init();
+        });
+    </script>
+    <script>
+        function swapScreen(id) {
+            jQuery('.visible').removeClass('visible animated fadeInUp');
+            jQuery('#' + id).addClass('visible animated fadeInUp');
+        }
+    </script>
+    <script>
+        if (!window.jigsaw) {
+            document.write('<script src="./ValidateCode/dist/jigsaw.min.js"><\/script>');
+        }
+    </script>
+    <script>
+        jigsaw.init({
+            el: document.getElementById('captcha'),
+            onSuccess: function () {
+                document.getElementById('msg').innerHTML = '验证成功！';
+                var name = $("#exampleInputEmail1").val();
+                var pwd = $("#exampleInputPassword1").val();
+                if (name == "" || pwd == "") {
+                    document.getElementById('msg').innerHTML = '账号或密码不能为空！';
+                }
+                else {
+                    login(name, pwd);
+                }
+            },
+            onFail: function () {
+                document.getElementById('msg').innerHTML = '验证失败！';
+                setInterval(function () {
+                    cleanMsg();
+                },1000);
+            },
+            onRefresh: cleanMsg
+        })
+        function cleanMsg() {
+            el: document.getElementById('captcha');
+            document.getElementById('msg').innerHTML = ''
+        }
+        function login(name, pwd) {
+            $.ajax({
+                url: "http://localhost:55237/api/Account/Login/?name=" + name + "&pwd=" + pwd,
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    if (data != null) {
+                        $(data).each(function () {
+                            if (this.ERole == 0) {
+                                location.href = "/Achievements/Zhuye/";
+                            }
+                            else if (this.ERole == 1) {
+                                location.href = "/BoosGoods/Head/";
+                            }
+                        });
+                    }
+                    else {
+                        document.getElementById('msg').innerHTML = '账号或密码错误！'
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
