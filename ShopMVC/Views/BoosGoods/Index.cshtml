@@ -4,8 +4,10 @@
     Layout = "~/Views/Boss.cshtml";
 }
 <script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
 <div>
-    <table>
+    <table id="table" class="layui-table">
         <thead>
             <tr>
                 <td>图片</td>
@@ -21,10 +23,12 @@
         <thead id="G_xian">
         </thead>
     </table>
+    <div id="demo7"></div>
 </div>
 <script>
-    Goods_xian();
-    function Goods_xian() {//显示商品信息
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
         $.ajax({
             url: "http://localhost:55237/api/Goods/Index",
             type: 'get',
@@ -32,11 +36,27 @@
             success: function (data) {
                 $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
                 for (var i in data) {
-                    $("#G_xian").append("<tr><td><img height='40' width='50' src=" + data[i].GPicture + " alt=" + data[i].GName + " /></td><td>" + data[i].GName + "</td><td>" + data[i].GColor + "</td><td>" + data[i].GSize + "</td><td>" + data[i].GQuantity + "</td><td>" + data[i].GPrice + "</td><td>" + data[i].GPricing + "</td><td>" + (data[i].GState==0?"上架":"下架") + "</td></tr >");
+                    //完整功能
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        
+                        , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                        , jump: function (obj) {
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td><img height="40" width="50" src=' + item.GPicture + ' alt=' + item.GName + ' /></td><td>' + item.GName + '</td><td>' + item.GColor + '</td><td>' + item.GSize + '</td><td>' + item.GQuantity + '</td><td>' + item.GPrice + '</td><td>' + item.GPricing + '</td><td>' + (item.GState == 0 ? "上架" : "下架") + '</td></tr >');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    });
                 }
 
             }
         })
-    };
+    });
 </script>
 

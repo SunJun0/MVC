@@ -4,64 +4,70 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Boss.cshtml";
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ESex)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EHiredate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ERole)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EState)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ESex)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EHiredate)
-        </td>
-        <td>
-            @if (item.ERole == 0)
-            {
-                @:老板
-            }
-            else if (item.ERole == 1)
-            {
-                @:员工
-            }
-        </td>
-        <td>
-            @if (item.EState == 0)
-            {
-                @:就职
-            }
-            else if (item.EState == 1)
-            {
-                @:已辞职
-            }
-        </td>
-    </tr>
-}
 
-</table>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<div>
+    <table id="table" class="layui-table">
+        <thead>
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>入职时间</td>
+                <td>角色</td>
+                <td>在职状态</td>
+            </tr>
+        </thead>
+        <thead id="G_xian">
+        </thead>
+    </table>
+    <div id="demo7"></div>
+</div>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        $.ajax({
+            url: "http://localhost:55237/api/Employees/ShowEmployees",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
+                for (var i in data) {
+                    //完整功能
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+
+                        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+                        , limit:8
+                        , jump: function (obj) {
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td>' + item.EId + '</td><td>' + item.EName + '</td><td>' + item.ESex + '</td><td>' + item.EHiredate + '</td><td>' + (item.ERole == 0 ? "员工" : "老板") + '</td><td>' + (item.EState == 0 ? "就职" : "已辞职") +  '</td></tr >');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+
+            }
+        })
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
