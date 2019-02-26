@@ -26,9 +26,18 @@ namespace ShopMVC.Controllers
         }
         public ActionResult ShowPrice()
         {
-            string result = HttpClientHelper.Send("get", "/api/Employees/ShowPrice", null);
-            List<Market> jias = JsonConvert.DeserializeObject<List<Market>>(result);
-            return View(jias);
+            //string result = HttpClientHelper.Send("get", "/api/Employees/ShowPrice", null);
+            //List<Market> jias = JsonConvert.DeserializeObject<List<Market>>(result);
+            //ViewBag.ss = jias;
+            return View();
+        }
+        //员工上个月的工资 
+        public ActionResult ShowWages()
+        {
+            //string result = HttpClientHelper.Send("get", "/api/Employees/ShowPrice", null);
+            //List<Market> jias = JsonConvert.DeserializeObject<List<Market>>(result);
+            //ViewBag.ss = jias;
+            return View();
         }
     }
 }

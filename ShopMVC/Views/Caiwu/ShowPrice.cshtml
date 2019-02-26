@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ShowPrice";
     Layout = "~/Views/Boss.cshtml";
 }
 
@@ -11,12 +11,7 @@
     <table id="table" class="layui-table">
         <thead>
             <tr>
-                <td>订单编号</td>
-                <td>购买数量</td>
-                <td>售出时间</td>
-                <td>名称</td>
-                <td>颜色</td>
-                <td>图片</td>
+                <td>总进价金额</td>
             </tr>
         </thead>
         <thead id="G_xian">
@@ -29,7 +24,7 @@
         var laypage = layui.laypage
             , layer = layui.layer;
         $.ajax({
-            url: "http://localhost:55237/api/Employees/ShowMarket",
+            url: "http://localhost:55237/api/Employees/ShowPrice",
             type: 'get',
             dataType: 'Json',
             success: function (data) {
@@ -41,13 +36,13 @@
                         , count: data.length
 
                         , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
-                        , limit:5
+                        , limit: 5
                         , jump: function (obj) {
                             document.getElementById('G_xian').innerHTML = function () {
                                 var arr = []
                                     , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
                                 layui.each(thisData, function (index, item) {
-                                    arr.push('<tr><td>' + item.MCard + '</td><td>' + item.MNnum + '</td><td>' + item.MTime + '</td><td>' + item.GName + '</td><td>' + item.GColor + '</td><td><img height="80" width="300" src=' + item.GPicture + ' alt=' + item.GName + ' /></td></tr >');
+                                    arr.push('<tr><td>' + item.Zong + '</td></tr >');
                                 });
                                 return arr.join('');
                             }();
@@ -59,12 +54,4 @@
         })
     });
 </script>
-
-
-
-
-
-
-
-
 
