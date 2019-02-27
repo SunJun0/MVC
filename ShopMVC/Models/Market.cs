@@ -25,6 +25,7 @@ namespace ShopMVC.Models
         public float GPricing { get; set; }  //定价  
         public string GPicture { get; set; }  //图片
         public int GState { get; set; }   //商品状态
-        public int Zong { get; set; } //总进价金额
+        public float Zong { get; set; } //总进价金额
+        
     }
 }
