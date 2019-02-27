@@ -37,5 +37,7 @@ namespace ShopMVC.Controllers
                 return Content("bu ok");
             }
         }
+
+       
     }
 }
