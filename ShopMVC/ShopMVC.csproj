@@ -682,9 +682,7 @@
     <Content Include="Views\Achievements\Zhuye.cshtml" />
     <Content Include="Views\Customer\ZhuCe.cshtml" />
     <Content Include="Views\BoosGoods\Index.cshtml" />
-    <Content Include="Views\BoosGoods\Tu.cshtml" />
     <Content Include="Views\ShopCar\ShopIndex.cshtml" />
-    <Content Include="Views\BoosGoods\Head.cshtml" />
     <Content Include="Views\Employees\Xiu.cshtml" />
     <Content Include="Views\ShopCar\ShopIndex.cshtml" />
     <Content Include="Views\Achievements\GetAchievements.cshtml" />
