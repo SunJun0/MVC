@@ -9,8 +9,8 @@ namespace ShopMVC.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
-        //客户注册
-        public ActionResult Index()
+        //客户会员注册
+        public ActionResult ZhuCe()
         {
             return View();
         }

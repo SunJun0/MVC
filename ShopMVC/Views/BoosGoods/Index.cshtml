@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Boss.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<div>
+    <table id="table" class="layui-table">
+        <thead>
+            <tr>
+                <td>图片</td>
+                <td>名称</td>
+                <td>颜色</td>
+                <td>尺码</td>
+                <td>库存</td>
+                <td>进价</td>
+                <td>定价</td>
+                <td>是否上架</td>
+            </tr>
+        </thead>
+        <thead id="G_xian">
+        </thead>
+    </table>
+    <div id="demo7"></div>
+</div>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        $.ajax({
+            url: "http://localhost:55237/api/Goods/Index",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                $("#Goods_xian").empty();// 清空TBODY的内容，重新加载
+                for (var i in data) {
+                    //完整功能
+                    laypage.render({
+                        elem: 'demo7'
+                        , count: data.length
+                        
+                        , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                        , jump: function (obj) {
+                            document.getElementById('G_xian').innerHTML = function () {
+                                var arr = []
+                                    , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
+                                layui.each(thisData, function (index, item) {
+                                    arr.push('<tr><td><img height="40" width="50" src=' + item.GPicture + ' alt=' + item.GName + ' /></td><td>' + item.GName + '</td><td>' + item.GColor + '</td><td>' + item.GSize + '</td><td>' + item.GQuantity + '</td><td>' + item.GPrice + '</td><td>' + item.GPricing + '</td><td>' + (item.GState == 0 ? "上架" : "下架") + '</td></tr >');
+                                });
+                                return arr.join('');
+                            }();
+                        }
+                    });
+                }
+
+            }
+        })
+    });
+</script>
+

@@ -8,6 +8,10 @@
 <link href="~/css/bootstrap.css" rel="stylesheet" />
 <link href="~/css/etalage.css" rel="stylesheet" />
 <link href="~/css/style.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<script src="~/layui/layui.all.js"></script>
 <html>
 <head>
     <title>Home</title>
@@ -48,7 +52,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <a href="#"><li>个人信息</li></a>
                     <a href="#">
                         <li>
-                            <span class="m_1">个人密码修改</span>@*&nbsp;&nbsp;(0) &nbsp;*@
+                           <a  href="/Employees/Xiu"><span class="m_1">个人密码修改</span></a>
+                            @*&nbsp;&nbsp;(0) &nbsp;*@
                             <img src="~/images/bag.png" />
                         </li>
                     </a>
@@ -62,17 +67,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="container">
                 <a class="toggleMenu" href="#">Menu</a>
                 <ul class="nav">
-                    <li class="active"><a href="index.html" data-hover="Home">主页</a></li>
-                    <li><a href="about.html" data-hover="About Us">销售排行</a></li>
+                    <li class="active"><a href="/Achievements/Zhuye" data-hover="Home">主页</a></li>
+                    <li><a href="/Achievements/GetAchievements" data-hover="About Us">销售排行</a></li>
                     <li><a href="careers.html" data-hover="Careers">商品查询</a></li>
                     <li><a href="contact.html" data-hover="Contact Us">商品销售</a></li>
-                    <li><a href="404.html" data-hover="Company Profile">顾客注册</a></li>
-                    @*<li><a href="register.html" data-hover="Company Registration">王禄超</a></li>
-                        <li><a href="wishlist.html" data-hover="Wish List">王禄超</a></li>*@
+                    <li><a href="/Customer/ZhuCe" data-hover="Company Profile">顾客注册</a></li>
+                   
                 </ul>
                 <script type="text/javascript" src="js/nav.js"></script>
+
             </div><!-- end h_menu4 -->
         </div>
+        
     </div>
 
     @RenderBody()

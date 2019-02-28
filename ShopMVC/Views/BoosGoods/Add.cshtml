@@ -4,107 +4,142 @@
     Layout = "~/Views/Boss.cshtml";
 }
 <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<div style="float:left">
+    <form class="layui-form" action="">
+        <table>
+            <tr>
+                <td><label class="layui-form-label">名称</label></td>
+                <td><input id="name" type="text" lay-verify="required" autocomplete="off" placeholder="请输入名称" class="layui-input"></td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">颜色</label></td>
+                <td>
+                    <select id="color" lay-verify="required" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="红色">红色</option>
+                        <option value="白色">白色</option>
+                        <option value="黑色">黑色</option>
+                        <option value="蓝色">蓝色</option>
+                        <option value="粉色">粉色</option>
+                        <option value="灰色">灰色</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">尺寸</label></td>
+                <td><input id="size" type="text" lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input"></td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">数量</label></td>
+                <td><input id="sum" type="text" lay-verify="required" autocomplete="off" placeholder="请输入数量" class="layui-input"></td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">进价</label></td>
+                <td><input id="GPrice" type="text" lay-verify="required" autocomplete="off" placeholder="请输入进价" class="layui-input"></td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">定价</label></td>
+                <td><input id="GPricing" type="text" lay-verify="required" autocomplete="off" placeholder="请输入定价" class="layui-input"></td>
+                <td><b id="GPricing_t" style="color:red"></b></td>
+            </tr>
+            <tr>
+                <td><label class="layui-form-label">图片</label></td>
 
-<form class="layui-form" action="">
-    <table>
-        <tr>
-            <td><label class="layui-form-label">名称</label></td>
-            <td><input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入名称" class="layui-input"></td>
-        </tr>
-        <tr>
-            <td><label class="layui-form-label">颜色</label></td>
-            <td>
-                <select name="modules" lay-verify="required" lay-search="">
-                    <option value="">直接选择或搜索选择</option>
-                    <option value="1">红色</option>
-                    <option value="2">白色</option>
-                    <option value="3">黑色</option>
-                    <option value="4">蓝色</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td><label class="layui-form-label">尺寸</label></td>
-            <td><input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"></td>
-        </tr>
-        <tr>
-            <td><label class="layui-form-label">数量</label></td>
-            <td><input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入数量" class="layui-input"></td>
-        </tr>
-        <tr>
-            <td><label class="layui-form-label">进价</label></td>
-            <td><input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入进价" class="layui-input"></td>
-        </tr>
-        <tr>
-            <td><label class="layui-form-label">定价</label></td>
-            <td><input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入定价" class="layui-input"></td>
-        </tr>
-        <tr>
-            <td><label class="layui-form-label">图片</label></td>
-            @*<div class="layui-upload">
-                    <button type="button" class="layui-btn" id="test1">上传图片</button>
-                    <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="demo1">
-                        <p id="demoText"></p>
-                    </div>
-                </div>*@
-            <td><input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input"></td>
-        </tr>
-    </table>
-    </div>
-    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-        </div>
-    </div>
-</form>
+                <td><img class="layui-upload-img" width="200" height="200" id="demo1"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button id="gooods" class="layui-btn" lay-submit="" lay-filter="demo1" onclick="Goods()">立即提交</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script src="~/layui-v2.4.5/layui/layui.all.js"></script>
-<div class="layui-upload">
-    <button type="button" class="layui-btn" id="test1">上传图片</button>
-    <div class="layui-upload-list">
-        <img class="layui-upload-img" id="demo1">
-        <p id="demoText"></p>
-    </div>
+<div class="layui-upload-drag" id="test10" style="float:right">
+    <i class="layui-icon"></i>
+    <p>点击上传，或将图片拖拽到此处</p>
 </div>
 <script>
+    $("#GPricing").change(function () {
+        var GPrice = $("#GPrice").val();
+        var GPricing = $("#GPricing").val();
+        if (GPrice <= GPricing) {
+            $("#GPricing_t").text("");
+        }
+        else {
+            $("#GPricing_t").text("进价高于定价，请慎重考虑！");
+        }
+    });
     layui.use('upload', function () {
         var $ = layui.jquery
             , upload = layui.upload;
 
-        //普通图片上传
-        var uploadInst = upload.render({
-            elem: '#test1'
-            , url: '/upload/'
-            , before: function (obj) {
-                //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#demo1').attr('src', result); //图片链接（base64）
-                });
-            }
-            , done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
-                }
-                //上传成功
-            }
-            , error: function () {
-                //演示失败状态，并实现重传
-                var demoText = $('#demoText');
-                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function () {
-                    uploadInst.upload();
-                });
-            }
-        });
         //拖拽上传
         upload.render({
             elem: '#test10'
-            , url: '/upload/'
-            , done: function (res) {
-                console.log(res)
+            , url: "/BoosGoods/File"
+            , accept: "images"//文件类型
+            , auto: false//不自动上传
+            , bindAction: '#gooods'//绑定按钮
+            , choose: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo1').attr('src', result); //图片链接（base64）
+            });
             }
+            //, done: function (res) {
+            //    console.log(res)
+            //}
         });
+    });
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        form.on('submit(demo1)', function (data) {
+            //解决layui默认只能用from提交，不返回ajax的回调函数问题
+            return false;//重点
+        });
+    });
+
+    function Goods() {//提交商品信息
+        var GName = $("#name").val();
+        var GColor = $("#color").val();
+        var GSize = $("#size").val();
+        var GQuantity = $("#sum").val();
+        var GPrice = $("#GPrice").val();
+        var GPricing = $("#GPricing").val();
+        var GPicture = $('#demo1').attr("src");//获取图片的路径
+        var GState = 0;
+        if (GName == "" || GColor == "" || GSize == "" || GQuantity == "" || GPrice == "" || GPricing == "")
+        {
+            return;
+        }
+        else if (GPicture == null) {
+            layer.msg('请选择图片');
+            return;
+        }
+        else {
+            $.ajax({
+                url: "http://localhost:55237/api/Goods/Add",
+                type: 'post',
+                data: { GName: GName, GColor: GColor, GSize: GSize, GQuantity: GQuantity, GPrice: GPrice, GPricing: GPricing, GPicture: GPicture, GState: GState },
+                dataType: 'text',
+                success: function (data) {
+                    if (data > 0) {
+                        layer.msg('成功');
+
+                    }
+                    else {
+                        layer.msg('失败');
+                    }
+                }
+            })
+        }
+    }
 </script>

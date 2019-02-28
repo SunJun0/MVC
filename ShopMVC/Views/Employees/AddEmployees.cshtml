@@ -1,6 +1,8 @@
 ﻿@model ShopMVC.Models.Employees
 
 @{
+    /**/
+
     ViewBag.Title = "AddEmployees";
     Layout = "~/Views/Boss.cshtml";
 }
@@ -10,38 +12,126 @@
         border-spacing: 10px;
     }
 </style>
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-@using (Html.BeginForm())
-{
-<table>
-    <tr>
-        <td>姓名</td>
-        <td><input id="Text1" type="text" name="EName" /></td>
-    </tr>
-    <tr>
-        <td>性别</td>
-        <td>
-            <input id="Radio1" type="radio" checked value="男" name="ESex" />男
-            <input id="Radio1" type="radio" value="女" name="ESex" />女
-        </td>
-    </tr>
-    <tr>
-        <td>入职时间</td>
-        <td><input id="Text1" type="date" name="EHiredate" /></td>
-    </tr>
-    <tr>
-        <td>密码</td>
-        <td>
-            <input id="Text1" type="text" name="EPwd" />
-            <input id="Hidden1" type="hidden" value="1" name="ERole" />
-            <input id="Hidden1" type="hidden" value="0" name="EState" />
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><input type="submit" value="入职" class="btn btn-default" /></td>
-    </tr>
-</table>
-}
+
+<script src="~/layui/layui.js"></script>
+<script src="~/layui/layui.all.js"></script>
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+<div>
+    <form class="layui-form" action="/Employees/AddEmployees" method="post" id='fm1' lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="EName" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input" v-model="user.username">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="ESex" value="0" title="男" v-model='user.sex' checked="">
+                <input type="radio" name="ESex" value="1" title="女" v-model='user.sex'>
+            </div>
+        </div>
+
+        <div class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">入职时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="EHiredate" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input type="password" v-model='user.userpwd' name="EPwd" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <input id="Hidden1" type="hidden" value="1" name="ERole" />
+        <input id="Hidden1" type="hidden" value="0" name="EState" />
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="submit" class="layui-btn" lay-submit="/Employees/AddEmployees" v-on:click='dataSubmit' value="立即提交" />
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/layui-v2.4.5/layui/layui.all.js"></script>
+<script>
+    window.onload = function () {
+        //Lay脚本Start
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });
+            laydate.render({
+                elem: '#test5'
+                , type: 'datetime'
+            });
+            //创建一个编辑器
+            var editIndex = layedit.build('LAY_demo_editor');
+
+            //监听指定开关
+            form.on('switch(switchTest)', function (data) {
+                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                    offset: '6px'
+                });
+                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            });
+
+        })
+        //LayUI脚本End
+
+        //Vue 脚本Start
+        var vm = new Vue({
+            el: '#fm1',
+            data: { user: { username: '', userpwd: '', country: 0, isHun: true, sex: 0, fav: [''], myself: '' } },
+            created: function () {
+                //一般来说这里会发送ajax请求
+                this.user = { username: '张三', userpwd: '123', country: 2, isHun: true, sex: 1, fav: ['read', 'write'], myself: '通天塔' };
+
+                //axios发送ajax
+                //axios.get('url').then(function(response){
+                //成功时回调 response响应的数据 赋值给this.user
+                //})catch(function(error){
+                //失败时回调 error失败时的错误消息
+
+                //})
+            },
+            methods: {
+                dataSubmit: function () {
+                    //axios.post('url',this.user)
+                    //.then(fucntion(response){
+                    //提交成功回调
+                    //})
+                    //.catch(function(error){
+                    //提交失败回调
+                    //})
+
+                    //获取需保存的信息 位于this.user中
+
+                    layer.open({ title: '获取表单数据', content: JSON.stringify(this.user) });
+
+                }
+            }
+        });
+        //Vue 脚本End
+
+    };
 
 
+</script>
