@@ -3,37 +3,87 @@
     ViewBag.Title = "ShopIndex";
     Layout = "~/Views/Employees.cshtml";
 }
-
+@using ShopMVC.Models
+@model List<Goods>
+<script src="~/Scripts/jquery.validate.js"></script>
 <div style="width:50%;height:420px;float:left;margin-top:50px">
-    <div style="background-color:red;width:150px;height:150px;margin-left:260px">
-    </div><br />
-    <div style="margin-left:260px">
-        <span>名称：</span><br /><br />
+    @if (Convert.ToInt32(ViewBag.sum) != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div style="background-color:red;width:150px;height:150px;margin-left:260px">
 
-        <span>颜色：</span><br /><br />
+            </div><br />
+            <div style="margin-left:260px">
 
-        <span>尺码：</span><br /><br />
+                <span>名称：</span><span>@item.GName</span><br /><br />
 
-        <span>库存：</span><br /><br />
+                <span>颜色：</span><span>@item.GColor</span><br /><br />
 
-        <b style="color:red">￥：88</b><br /><br />
+                <span>尺码：</span><span>@item.GSize</span><br /><br />
 
-        <input id="Button1" type="button" value="加入购物车" />
-    </div>
+                <span>购买数量：</span><span><input id="num" type="text" /></span><br /><br />
 
+                <span>库存：</span><span>@item.GQuantity</span><br /><br />
+
+                <b style="color:red">￥：@item.GPricing</b><br /><br />
+
+
+
+                <input id="Button1" type="button" value="加入购物车" onclick="JiaRu()" />
+                <a href="/ShopCar/ShowShopCar">返回购物车</a>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div style="background-color:red;width:150px;height:150px;margin-left:260px">
+
+        </div><br />
+        <div style="margin-left:260px">
+
+            <span>名称：</span><br /><br />
+
+            <span>颜色：</span><br /><br />
+
+            <span>尺码：</span><br /><br />
+
+            <span>购买数量：</span><span><input id="num" type="text" /></span><br /><br />
+
+            <span>库存：</span><br /><br />
+
+            <b style="color:red">￥：</b><br /><br />
+
+
+
+            <input id="Button1" type="button" value="加入购物车" />
+            <a href="/ShopCar/ShowShopCar">返回购物车</a>
+        </div>
+    }
 </div>
-@Html.BeginForm()
+@using (Html.BeginForm())
 {
-<div style="width:50%;height:420px;float:left;margin-top:50px" ">
-    <div align="center">
-        <span>名称：</span><input name="GName" type="text" /><br /><br /><br /><br />
+    <div style="width:50%;height:420px;float:left;margin-top:50px">
+        <div align="center">
+            <span>名称：</span>@Html.DropDownList("Gname", ViewBag.GId as IEnumerable<SelectListItem>)<br /><br /><br /><br />
 
-        <span>颜色：</span><input name="GColor" type="text" /><br /><br /><br /><br />
+            <span>颜色：</span><select name="GColor">
+                <option>3</option>
+                <option>2</option>
+            </select><br /><br /><br /><br />
 
-        <span>尺码：</span><input name="GSize" type="text" /><br /><br /><br /><br />
+            <span>尺码：</span><select name="GSize">
+                <option>3</option>
+                <option>2</option>
+            </select><br /><br /><br /><br />
 
-        <span align="center"><input id="Button1" type="submit" value="商品查询" /></span>
+            <span align="center"><input id="Button1" type="submit" value="商品查询" /></span>
+        </div>
     </div>
-</div>
 }
-
+<script>
+    function JiaRu() {
+        location.href = '/ShopCar/AddShopCar/?num=' + $("#num").val()
+    }
+</script>
