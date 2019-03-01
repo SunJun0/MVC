@@ -32,10 +32,6 @@ namespace ShopMVC.Controllers
         {
             return View();
         }
-        public ActionResult Shi()//测试
-        {
-            return View();
-        }
 
     }
 }

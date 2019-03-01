@@ -12,6 +12,10 @@ namespace ShopMVC
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                name: "Download",
+                url: ""
+            );
 
             routes.MapRoute(
                 name: "Default",

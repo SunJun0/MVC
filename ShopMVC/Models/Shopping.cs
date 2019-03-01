@@ -17,6 +17,7 @@ namespace ShopMVC.Models
         public bool SState { get; set; }
 
         public string GName { get; set; }  //名称
+        public string GPicture { get; set; }//图片
         public string GColor { get; set; }  //颜色
         public int GSize { get; set; }   //尺寸
         public float GPricing { get; set; }  //定价  

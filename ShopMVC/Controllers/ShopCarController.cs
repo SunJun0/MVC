@@ -13,8 +13,8 @@ namespace ShopMVC.Controllers
 {
     public class ShopCarController : Controller
     {
-        #region 商品查询
-        static List<Goods> list = new List<Goods>();
+            #region 商品查询
+            static List<Goods> list = new List<Goods>();
 
         string dt = "";
         static int num = 1;
