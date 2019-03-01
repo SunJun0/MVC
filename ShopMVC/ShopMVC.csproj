@@ -65,9 +65,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\..\..\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -1977,6 +1974,14 @@
     <Content Include="ValidateCode\.gitignore" />
     <Content Include="ValidateCode\package.json" />
     <Content Include="ValidateCode\README.md" />
+    <Content Include="UpFiles\ExcelFiles\工资表-20190301104614363.xls" />
+    <Content Include="UpFiles\ExcelFiles\工资表-20190301114443035.xls" />
+    <Content Include="UpFiles\ExcelFiles\成绩单-20190301102243166.xls" />
+    <Content Include="UpFiles\ExcelFiles\成绩单-20190301102528920.xls" />
+    <Content Include="UpFiles\ExcelFiles\成绩单-20190301102952251.xls" />
+    <Content Include="UpFiles\ExcelFiles\成绩单-20190301103400314.xls" />
+    <Content Include="UpFiles\ExcelFiles\成绩单-20190301104230494.xls" />
+    <Content Include="UpFiles\ExcelFiles\成绩单-20190301104427880.xls" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
