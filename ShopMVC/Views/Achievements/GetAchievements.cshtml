@@ -7,23 +7,23 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-<div class="layui-anim layui-anim-rotate" data-anim="layui-anim-rotate">
+<div class="layui-anim layui-anim-scale" data-anim="layui-anim-scale">
 
-        <table id="table" class="layui-table">
-            <thead>
-                <tr>
-                    <td>名次</td>
-                    <td>姓名</td>
-                    <td>性别</td>
-                    <td>销售额</td>
+    <table id="table" class="layui-table">
+        <thead>
+            <tr>
+                <td>名次</td>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>销售额</td>
 
-                </tr>
-            </thead>
-            <thead id="G_xian">
-            </thead>
-        </table>
-        <div id="demo7"></div>
-    </div>
+            </tr>
+        </thead>
+        <thead id="G_xian">
+        </thead>
+    </table>
+    <div id="demo7"></div>
+</div>
     <script>
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
