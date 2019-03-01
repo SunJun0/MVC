@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "ShowShopCar";
+    Layout = "~/Views/Employees.cshtml";
+}
+@using ShopMVC.Models
+@model List<Shopping>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<div style="width:100%;height:40px;background-color:red" align="center">
+    VIP用户 请输入手机号：<input id="Phone" type="text" />
+    <input id="Button1" type="button" value="提交订单" style="margin-top:5px" @*data-toggle="modal" data-target="#myModal"*@ onclick="TallyOrder()" />
+    <div style="margin-right:20px;float:right"><b>总金额：@ViewBag.Sum</b></div>
+</div>
+
+
+@foreach (var item in Model)
+{
+
+    <div style="width:200px;height:400px;background-color:red;margin-top:20px;margin-left:24px;float:left">
+        <div style="background-color:blue;width:120px;height:120px;margin-left:40px;margin-top:20px">
+        </div><br />
+        <div align="center">
+
+            <span>名称：</span>@item.GName<br /><br />
+
+            <span>颜色：</span>@item.GColor<br /><br />
+
+            <span>尺码：</span>@item.GSize<br /><br />
+
+            <span>购买数量：</span>@item.SNum<br /><br />
+
+            <span>单价：</span> <b style="color:blue">￥@item.GPricing</b><br /><br />
+
+
+        </div>
+
+    </div>
+}
+
+
+@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="height:500px;">
+                结算
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>*@
+<script>
+    function TallyOrder() {
+        $.ajax({
+            url: "/ShopCar/TallyOrder/?Phone=" + $("#Phone").val(),
+            success: function () {
+
+            }
+        })
+    }
+</script>

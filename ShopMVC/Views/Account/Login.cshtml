@@ -107,7 +107,7 @@
                 document.getElementById('msg').innerHTML = '验证失败！';
                 setInterval(function () {
                     cleanMsg();
-                },1000);
+                }, 1000);
             },
             onRefresh: cleanMsg
         })
@@ -125,6 +125,7 @@
                         $(data).each(function () {
                             if (this.ERole == 0) {
                                 location.href = "/Achievements/Zhuye/";
+
                             }
                             else if (this.ERole == 1) {
                                 location.href = "/BoosGoods/Head/";

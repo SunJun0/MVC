@@ -13,6 +13,7 @@ namespace ShopMVC.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            ViewBag.ID = 0;
             return View();
         }
         //[HttpPost]

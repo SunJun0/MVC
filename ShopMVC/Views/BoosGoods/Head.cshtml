@@ -54,7 +54,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">349</span></div>
+                                    <div class="stat-text" id="zong"><span class="count"></span></div>
                                     <div class="stat-heading">商品总库存</div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text" ><span id="G_s" class="count">17</span></div>
+                                    <div class="stat-text" id="G_s" ><span class="count"></span></div>
                                     <div class="stat-heading">会员</div>
                                 </div>
                             </div>
@@ -140,7 +140,8 @@
     var Name = [];//姓名
     var ASale = [];//销售额
     var Sum = 0;//本月总销售额
-    var G_sum = 0;
+    var G_sum = 0;//会员
+    var Zong = 0;//库存货价
         $.ajax({
             url: "http://localhost:55237/api/Achievements/GetAchievements_1",
             type: 'get',
@@ -153,6 +154,9 @@
                 }
                 fn1();
                 fn();
+                
+                $("#sum").text(Sum);
+                
             }
     });
     
@@ -166,9 +170,24 @@
                     G_sum++;
                 }
                 $("#G_s").text(parseInt(G_sum));
+                fn2();
             }
         });
-        $("#sum").text(Sum);
+        
+    }
+    function fn2() {
+        $.ajax({
+            url: "http://localhost:55237/api/Employees/ShowPrice",
+            type: 'get',
+            dataType: 'Json',
+            success: function (data) {
+                for (var i in data) {
+                    Zong = data[i].Zong
+                }
+                $("#zong").text(Zong);
+                
+            }
+        })
     }
     
     
@@ -190,7 +209,6 @@
                 type: 'line'
             }]
         };
-        ;
         if (option && typeof option === "object") {
             myChart.setOption(option, true);
         }
