@@ -10,19 +10,13 @@
 <script src="~/Scripts/bootstrap.js"></script>
 <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
 <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-<script src="~/layui-v2.4.5/layui/layui.js"></script>
-<div style="width:100%;height:40px;background-color:red" align="center">
-    VIP用户 请输入手机号：<input id="Phone" type="text" />
-    <input id="Button1" type="button" value="提交订单" style="margin-top:5px" @*data-toggle="modal" data-target="#myModal"*@ onclick="TallyOrder()" />
-    <div style="margin-right:20px;float:right"><b>总金额：@ViewBag.Sum</b></div>
-</div>
-
 
 @foreach (var item in Model)
 {
 
     <div style="width:200px;height:400px;background-color:red;margin-top:20px;margin-left:24px;float:left">
         <div style="background-color:blue;width:120px;height:120px;margin-left:40px;margin-top:20px">
+            <img style="width:120px;height:120px;" src="@item.GPicture" alt="@item.GName" />
         </div><br />
         <div align="center">
 
@@ -41,6 +35,29 @@
 
     </div>
 }
+<div style="overflow:hidden; width:100%;background-color:azure" align="center">
+    <form class="layui-form" id='fm1' lay-filter="example">
+        <div>
+            <div style="margin-right:20px;"><b style="color:red">总金额：￥@ViewBag.Sum</b></div>
+            <table>
+                <tr>
+                    <td><label class="layui-form-label">会员</label></td>
+                    <td><input type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否"></td>
+                    <td id="td"><label class="layui-form-label">手机号:</label></td>
+                    <td id="td"><input id="phone" style="width:150px; height:25px;" type="tel" name="phone" lay-verify="" autocomplete="off" class="layui-input" disabled=""></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="layui-btn" lay-submit="" lay-filter="demo1" onclick="TallyOrder()">提交订单</button></td>
+                </tr>
+            </table>
+        </div>
+
+
+
+    </form>
+</div>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
 
 
 @*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -51,7 +68,19 @@
         </div><!-- /.modal -->
     </div>*@
 <script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        form.on('switch(switchTest)', function (data) {
+            this.checked ? $("#phone").attr('disabled', false) : $("#phone").attr('disabled', true);//手机启用与禁用
+            this.checked ? $("#phone").attr('lay-verify', 'phone') : $("#phone").attr('lay-verify',"");//手机验收的启用与禁用
+            layer.msg( this.checked ? '启用手机号' : '禁用手机号');
+        });
+    });
     function TallyOrder() {
+        alert(1);
         $.ajax({
             url: "/ShopCar/TallyOrder/?Phone=" + $("#Phone").val(),
             success: function () {
