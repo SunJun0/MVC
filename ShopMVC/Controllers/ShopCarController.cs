@@ -154,7 +154,7 @@ namespace ShopMVC.Controllers
 
                 List<Customer> CList = JsonConvert.DeserializeObject<List<Customer>>(dt);
                 model m = new model();
-                m.YId = 3;
+                m.YId = 9;
                 m.SumPrice =Convert.ToSingle(Session["Sum"]);
                 int d = 0;
                 //判断是否为vip用户
