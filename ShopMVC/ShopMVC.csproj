@@ -1437,6 +1437,7 @@
     <Content Include="img\gallery\7.jpg" />
     <Content Include="img\gallery\8.png" />
     <Content Include="img\gallery\img\1.jpg" />
+    <Content Include="img\go.png" />
     <Content Include="img\gritter\buy.png" />
     <Content Include="img\gritter\cloud.png" />
     <Content Include="img\gritter\settings.png" />
@@ -1487,7 +1488,9 @@
     <Content Include="js\jquery-1.11.1.min.js" />
     <Content Include="js\jquery-1.8.0.min.js" />
     <Content Include="js\jquery.etalage.min.js" />
+    <Content Include="js\jquery.min.js" />
     <Content Include="js\nav.js" />
+    <Content Include="js\num-alignment.js" />
     <Content Include="js\responsiveslides.min.js" />
     <Content Include="layui-v2.4.5\layui\css\layui.css" />
     <Content Include="layui-v2.4.5\layui\css\layui.mobile.css" />
@@ -1936,13 +1939,10 @@
     <Content Include="Views\Boss.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\AddEmployees.cshtml" />
-    <Content Include="Views\BoosGoods\Add.cshtml" />
-    <Content Include="Views\BoosGoods\Shi.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\ShopCar\ShopIndex.cshtml" />
     <Content Include="Views\ShopCar\ShowShopCar.cshtml" />
     <Content Include="Views\BoosGoods\Add.cshtml" />
-    <Content Include="Views\BoosGoods\Shi.cshtml" />
     <Content Include="Views\Caiwu\Index.cshtml" />
     <Content Include="Views\Caiwu\ShowMarket.cshtml" />
     <Content Include="Views\Caiwu\ShowProfit.cshtml" />
@@ -1950,9 +1950,7 @@
     <Content Include="Views\Achievements\Zhuye.cshtml" />
     <Content Include="Views\Customer\ZhuCe.cshtml" />
     <Content Include="Views\BoosGoods\Index.cshtml" />
-    <Content Include="Views\ShopCar\ShopIndex.cshtml" />
     <Content Include="Views\Employees\Xiu.cshtml" />
-    <Content Include="Views\ShopCar\ShopIndex.cshtml" />
     <Content Include="Views\Achievements\GetAchievements.cshtml" />
     <Content Include="Views\Achievements\Zhuye.cshtml" />
     <Content Include="Views\BoosGoods\Head.cshtml" />

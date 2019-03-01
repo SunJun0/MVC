@@ -9,6 +9,8 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
 <div style="width:100%;height:40px;background-color:red" align="center">
     VIP用户 请输入手机号：<input id="Phone" type="text" />
     <input id="Button1" type="button" value="提交订单" style="margin-top:5px" @*data-toggle="modal" data-target="#myModal"*@ onclick="TallyOrder()" />
@@ -20,7 +22,7 @@
 {
 
     <div style="width:200px;height:400px;background-color:red;margin-top:20px;margin-left:24px;float:left">
-        <div style="background-color:blue;width:120px;height:120px;margin-left:40px;margin-top:20px">            
+        <div style="background-color:blue;width:120px;height:120px;margin-left:40px;margin-top:20px">
         </div><br />
         <div align="center">
 
@@ -42,12 +44,12 @@
 
 
 @*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="height:500px;">
-            结算
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>*@
+        <div class="modal-dialog">
+            <div class="modal-content" style="height:500px;">
+                结算
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>*@
 <script>
     function TallyOrder() {
         $.ajax({
