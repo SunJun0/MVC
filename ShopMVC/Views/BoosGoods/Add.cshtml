@@ -116,7 +116,8 @@
         var GPricing = $("#GPricing").val();
         var GPicture = $('#demo1').attr("src");//获取图片的路径
         var GState = 0;
-        if (GName == "" || GColor == "" || GSize == "" || GQuantity == "" || GPrice == "" || GPricing == "") {
+        if (GName == "" || GColor == "" || GSize == "" || GQuantity == "" || GPrice == "" || GPricing == "")
+        {
             return;
         }
         else if (GPicture == null) {
@@ -131,7 +132,7 @@
                 dataType: 'text',
                 success: function (data) {
                     if (data > 0) {
-                        layer.msg('成功');
+                        layer.msg('成功');      
 
                     }
                     else {
